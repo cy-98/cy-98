@@ -1,7 +1,7 @@
 - 👋 Hi, I’m @cy-98
 - 👀 I’m interested in javascript, React.
 - 🌱 I’m currently learning coding.
-- 💞️ I’m looking to collaborate on bodybuilding.
+- 💞️ [I’m looking for a job](https://cy-98.github.io/markdown-cv/).
 - 📫 How to reach me: wechat 18747099166.
 
 <!---
