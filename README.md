@@ -1,7 +1,7 @@
 - 👋 Hi, I’m @cy-98
 - 👀 I’m good at coding and photography.
 - 💞️ [Here is my CV](https://cy-98.github.io/markdown-cv/).
-- 📫 How to reach me: wechat 18747099166.
+- 📫 Reach me: wechat 18747099166.
 
 <!---
 cy-98/cy-98 is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
