@@ -1,6 +1,6 @@
 - 👋 Hi, I’m @cy-98
-- 👀 I’m interested in javascript, React.
-- 💞️ [I’m looking for a job](https://cy-98.github.io/markdown-cv/).
+- 👀 I’m good at coding and photography.
+- 💞️ [Here is my CV](https://cy-98.github.io/markdown-cv/).
 - 📫 How to reach me: wechat 18747099166.
 
 <!---
