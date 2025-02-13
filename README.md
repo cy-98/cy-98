@@ -1,7 +1,7 @@
 - 👋 Hi, I’m @cy-98
 - 👀 I’m good at coding and photography.
 - 💞️ [Here is my CV](https://cy-98.github.io/markdown-cv/).
-- [My thoughts here](https://docs.page/cy-98/cy-docs)
+- 🐢 [My thoughts here](https://docs.page/cy-98/cy-docs)
 - 📫 Reach me: wechat 18747099166.
 
 <!---
