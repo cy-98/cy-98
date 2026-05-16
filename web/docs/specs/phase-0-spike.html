@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Phase 0</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={theme:{extend:{colors:{lake:{DEFAULT:'#6eb8e8',dark:'#061428'}}}}}</script>
+  <link rel="stylesheet" href="css/specs.css" />
+</head>
+<body class="spec-body antialiased">
+<div class="flex min-h-screen flex-col lg:flex-row">
+<nav class="spec-nav shrink-0 border-b border-lake/20 bg-lake-dark/80 p-4 lg:w-56 lg:min-h-screen">
+  <p class="mb-3 text-xs uppercase tracking-widest text-lake">Spec</p>
+  <ul class="flex flex-col gap-1 text-sm">
+    <li><a href="index.html" class="text-slate-300">索引</a></li>
+    <li><a href="phase-0-spike.html" class="is-active text-slate-200">Phase 0</a></li>
+    <li><a href="phase-1-mvp-layers.html" class="text-slate-300">Phase 1</a></li>
+    <li><a href="phase-2-motion.html" class="text-slate-300">Phase 2</a></li>
+    <li><a href="phase-3-polish.html" class="text-slate-300">Phase 3</a></li>
+  </ul>
+</nav>
+<main class="spec-content flex-1 px-5 py-8 max-w-3xl">
+
+  <h1 class="text-3xl font-bold text-white mb-2">Phase 0 技术验证</h1>
+  <p class="spec-intro">目标：证明「星夜湖」WebGL 背景与可读前置 UI 在本地与 Pages 稳定运行。</p>
+  <p class="text-slate-400 mb-4">7/7 · 100%</p>
+  <div class="progress-bar mb-6"><div class="progress-bar__fill" style="width:100%"></div></div>
+  <h2 class="text-lg text-teal-300 mb-3 mt-6">已完成</h2>
+  <ul class="spec-checklist text-slate-300 mb-6">
+    
+  <li class="check-done spec-item">
+    <span class="spec-item-title">#scene-canvas 全屏底层</span>
+    <span class="spec-tags">index.html · style.css</span>
+    <p class="spec-detail"><strong>做了什么：</strong>全屏 canvas 底层，UI 毛玻璃面板叠在上方。</p>
+  </li>
+    
+  <li class="check-done spec-item">
+    <span class="spec-item-title">initScene / dispose / resize</span>
+    <span class="spec-tags">scene/index.ts · loop.ts</span>
+    <p class="spec-detail"><strong>做了什么：</strong>rAF 循环、窗口适配、资源释放。</p>
+  </li>
+    
+  <li class="check-done spec-item">
+    <span class="spec-item-title">stars.ts 星空</span>
+    <span class="spec-tags">scene/stars.ts</span>
+    <p class="spec-detail"><strong>做了什么：</strong>Points 星粒子，桌面/移动端数量可配。</p>
+  </li>
+    
+  <li class="check-done spec-item">
+    <span class="spec-item-title">lake.ts 湖面</span>
+    <span class="spec-tags">scene/lake.ts</span>
+    <p class="spec-detail"><strong>做了什么：</strong>Shader 湖面深蓝渐变与横向纹理。</p>
+  </li>
+    
+  <li class="check-done spec-item">
+    <span class="spec-item-title">镜头漫游</span>
+    <span class="spec-tags">config.ts · index.ts</span>
+    <p class="spec-detail"><strong>做了什么：</strong>缓慢前移并 Ping-Pong 折返，漫览星夜湖。</p>
+  </li>
+    
+  <li class="check-done spec-item">
+    <span class="spec-item-title">#ui-root 叠层</span>
+    <span class="spec-tags">ui/overlay.ts</span>
+    <p class="spec-detail"><strong>做了什么：</strong>个人介绍、场景说明、简洁模式开关。</p>
+  </li>
+    
+  <li class="check-done spec-item">
+    <span class="spec-item-title">Docker + Pages</span>
+    <span class="spec-tags">docker-compose.yml · pages.yml</span>
+    <p class="spec-detail"><strong>做了什么：</strong>本地 <code>docker compose up</code>；推送自动部署。</p>
+  </li>
+  </ul>
+  <h2 class="text-lg text-slate-400">未完成</h2>
+  <p class="text-sm text-slate-500">无</p>
+</main>
+</div>
+</body>
+</html>

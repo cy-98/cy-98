@@ -1,13 +1,5 @@
-# Scene layer assets
+# Scene
 
-Replace procedural placeholders by adding WebP files (transparent background):
+当前场景为 **纯代码**：WebGL 动态模式 = `stars.ts` + `lake.ts`；简洁模式 = CSS 渐变（`static-fallback--css`）。
 
-- `rock.webp` — 借火岩
-- `qingning.webp` — 青凝
-- `laojun.webp` — 老君
-- `flame.webp` — 火焰 / 火鸟
-- `boatRim.webp` — 船舷前景
-
-Recommended width: 512–1024px per layer. Keep total under ~3–5 MB for GitHub Pages.
-
-Until these files exist, the site uses canvas-generated placeholder art.
+无需放置 `*.webp` 插画。若将来添加可选 `poster.webp` / `poster.svg`，仅用于静态模式装饰，不影响动态场景。

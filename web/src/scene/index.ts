@@ -2,26 +2,14 @@ import * as THREE from 'three'
 import { SCENE } from './config'
 import { createStars, updateStars } from './stars'
 import { createLake, updateLake } from './lake'
-import {
-  createParallaxLayers,
-  updateParallaxLayers,
-  animateLayers,
-  type ParallaxLayer,
-} from './layers'
-import {
-  createFlameParticles,
-  updateFlameParticles,
-  createSmoke,
-  updateSmoke,
-} from './effects'
 import { createLoop } from './loop'
-import { loadSceneTexturesFromUrls } from './textures'
 
 export interface SceneHandle {
   dispose: () => void
   setScrollBoost: (value: number) => void
 }
 
+/** 星夜湖：仅程序化星空 + 湖面，无外链插画层 */
 export function initScene(canvas: HTMLCanvasElement): SceneHandle {
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
   const isMobile = window.innerWidth < SCENE.mobileBreakpoint
@@ -35,10 +23,10 @@ export function initScene(canvas: HTMLCanvasElement): SceneHandle {
   })
   renderer.setPixelRatio(dpr)
   renderer.setSize(window.innerWidth, window.innerHeight, false)
-  renderer.setClearColor(0x030810, 1)
+  renderer.setClearColor(SCENE.clearColor, 1)
 
   const scene = new THREE.Scene()
-  scene.fog = new THREE.FogExp2(0x061018, 0.018)
+  scene.fog = new THREE.FogExp2(SCENE.fogColor, SCENE.fogDensity)
 
   const camera = new THREE.PerspectiveCamera(
     SCENE.cameraFov,
@@ -55,38 +43,25 @@ export function initScene(canvas: HTMLCanvasElement): SceneHandle {
   const lake = createLake()
   scene.add(lake)
 
-  let layers: ParallaxLayer[] = createParallaxLayers()
-  for (const layer of layers) {
-    scene.add(layer.mesh)
-  }
-
-  const flameParticles = createFlameParticles(reducedMotion, isMobile)
-  const smoke = createSmoke(reducedMotion, isMobile)
-  scene.add(flameParticles)
-  scene.add(smoke)
-
   let cameraZ: number = SCENE.cameraStartZ
+  let travelDir: -1 | 1 = -1
   let scrollBoost = 0
-  let disposed = false
-
-  const baseUrl = import.meta.env.BASE_URL
-
-  loadSceneTexturesFromUrls(baseUrl).then((overrides) => {
-    if (disposed || Object.keys(overrides).length === 0) return
-    for (const layer of layers) {
-      scene.remove(layer.mesh)
-      layer.mesh.geometry.dispose()
-      ;(layer.mesh.material as THREE.Material).dispose()
-    }
-    layers = createParallaxLayers(overrides)
-    for (const layer of layers) {
-      scene.add(layer.mesh)
-    }
-  })
 
   const loop = createLoop((dt, elapsed) => {
     const speed = reducedMotion ? 0 : SCENE.forwardSpeed * (1 + scrollBoost * 0.35)
-    cameraZ = Math.max(SCENE.cameraMinZ, cameraZ - speed * dt)
+
+    if (!reducedMotion && SCENE.cameraPingPong) {
+      cameraZ += travelDir * speed * dt
+      if (cameraZ <= SCENE.cameraMinZ) {
+        cameraZ = SCENE.cameraMinZ
+        travelDir = 1
+      } else if (cameraZ >= SCENE.cameraStartZ) {
+        cameraZ = SCENE.cameraStartZ
+        travelDir = -1
+      }
+    } else if (!reducedMotion) {
+      cameraZ = Math.max(SCENE.cameraMinZ, cameraZ - speed * dt)
+    }
 
     const bob = reducedMotion
       ? 0
@@ -96,14 +71,10 @@ export function initScene(canvas: HTMLCanvasElement): SceneHandle {
       1.2 + bob,
       cameraZ,
     )
-    camera.lookAt(0, -0.5, cameraZ - 18)
+    camera.lookAt(0, -0.35, cameraZ - 20)
 
     updateStars(stars, elapsed, reducedMotion)
     updateLake(lake, elapsed, scrollBoost, reducedMotion)
-    updateParallaxLayers(layers, cameraZ, SCENE.cameraStartZ)
-    animateLayers(layers, elapsed, reducedMotion)
-    updateFlameParticles(flameParticles, elapsed, reducedMotion)
-    updateSmoke(smoke, elapsed, reducedMotion)
 
     renderer.render(scene, camera)
   })
@@ -121,15 +92,21 @@ export function initScene(canvas: HTMLCanvasElement): SceneHandle {
     else loop.start()
   }
 
-  let wheelTimeout = 0
+  const decayScrollBoost = () => {
+    if (scrollBoost <= 0) return
+    scrollBoost = Math.max(0, scrollBoost - 0.018)
+    if (scrollBoost > 0) requestAnimationFrame(decayScrollBoost)
+  }
+
+  let wheelDecayTimer = 0
   const onWheel = (e: WheelEvent) => {
     if (reducedMotion) return
-    scrollBoost = Math.min(1.5, scrollBoost + e.deltaY * 0.0004)
-    window.clearTimeout(wheelTimeout)
-    wheelTimeout = window.setTimeout(() => {
-      scrollBoost *= 0.92
-      if (scrollBoost < 0.02) scrollBoost = 0
-    }, 120)
+    if (SCENE.scrollBoostRequiresShift && !e.shiftKey) return
+    scrollBoost = Math.min(1.2, scrollBoost + e.deltaY * 0.00035)
+    window.clearTimeout(wheelDecayTimer)
+    wheelDecayTimer = window.setTimeout(() => {
+      requestAnimationFrame(decayScrollBoost)
+    }, 80)
   }
 
   window.addEventListener('resize', onResize)
@@ -143,7 +120,6 @@ export function initScene(canvas: HTMLCanvasElement): SceneHandle {
       scrollBoost = v
     },
     dispose() {
-      disposed = true
       loop.stop()
       window.removeEventListener('resize', onResize)
       document.removeEventListener('visibilitychange', onVisibility)
@@ -153,14 +129,6 @@ export function initScene(canvas: HTMLCanvasElement): SceneHandle {
       ;(stars.material as THREE.Material).dispose()
       lake.geometry.dispose()
       ;(lake.material as THREE.Material).dispose()
-      flameParticles.geometry.dispose()
-      ;(flameParticles.material as THREE.Material).dispose()
-      smoke.geometry.dispose()
-      ;(smoke.material as THREE.Material).dispose()
-      for (const layer of layers) {
-        layer.mesh.geometry.dispose()
-        ;(layer.mesh.material as THREE.Material).dispose()
-      }
     },
   }
 }

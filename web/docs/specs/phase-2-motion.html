@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Phase 2</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={theme:{extend:{colors:{lake:{DEFAULT:'#6eb8e8',dark:'#061428'}}}}}</script>
+  <link rel="stylesheet" href="css/specs.css" />
+</head>
+<body class="spec-body antialiased">
+<div class="flex min-h-screen flex-col lg:flex-row">
+<nav class="spec-nav shrink-0 border-b border-lake/20 bg-lake-dark/80 p-4 lg:w-56 lg:min-h-screen">
+  <p class="mb-3 text-xs uppercase tracking-widest text-lake">Spec</p>
+  <ul class="flex flex-col gap-1 text-sm">
+    <li><a href="index.html" class="text-slate-300">索引</a></li>
+    <li><a href="phase-0-spike.html" class="text-slate-300">Phase 0</a></li>
+    <li><a href="phase-1-mvp-layers.html" class="text-slate-300">Phase 1</a></li>
+    <li><a href="phase-2-motion.html" class="is-active text-slate-200">Phase 2</a></li>
+    <li><a href="phase-3-polish.html" class="text-slate-300">Phase 3</a></li>
+  </ul>
+</nav>
+<main class="spec-content flex-1 px-5 py-8 max-w-3xl">
+
+  <h1 class="text-3xl font-bold text-white mb-2">Phase 2 动画</h1>
+  <p class="spec-intro">目标：让星夜湖「活起来」，同时兼顾减动效与低性能设备。</p>
+  <p class="text-slate-400 mb-4">7/7 · 100%</p>
+  <div class="progress-bar mb-6"><div class="progress-bar__fill" style="width:100%"></div></div>
+  <h2 class="text-lg text-teal-300 mb-3 mt-6">已完成</h2>
+  <ul class="spec-checklist text-slate-300 mb-6">
+    
+  <li class="check-done spec-item">
+    <span class="spec-item-title">湖面 UV 波纹</span>
+    <span class="spec-tags">lake.ts updateLake</span>
+    <p class="spec-detail"><strong>做了什么：</strong>时间与滚轮加速联动水波。</p>
+  </li>
+    
+  <li class="check-done spec-item">
+    <span class="spec-item-title">星光闪烁</span>
+    <span class="spec-tags">stars.ts</span>
+    <p class="spec-detail"><strong>做了什么：</strong>星粒子微幅闪烁。</p>
+  </li>
+    
+  <li class="check-done spec-item">
+    <span class="spec-item-title">镜头微摇 + Ping-Pong</span>
+    <span class="spec-tags">config.ts</span>
+    <p class="spec-detail"><strong>做了什么：</strong>极轻摇摆与前后折返漫游。</p>
+  </li>
+    
+  <li class="check-done spec-item">
+    <span class="spec-item-title">Shift + 滚轮加速</span>
+    <span class="spec-tags">scrollBoostRequiresShift</span>
+    <p class="spec-detail"><strong>做了什么：</strong>按住 Shift 时滚轮才加快镜头。</p>
+  </li>
+    
+  <li class="check-done spec-item">
+    <span class="spec-item-title">prefers-reduced-motion</span>
+    <span class="spec-tags">runtime-mode.ts</span>
+    <p class="spec-detail"><strong>做了什么：</strong>减动效时减少星粒与湖波动画。</p>
+  </li>
+    
+  <li class="check-done spec-item">
+    <span class="spec-item-title">后台暂停 rAF</span>
+    <span class="spec-tags">loop.ts</span>
+    <p class="spec-detail"><strong>做了什么：</strong>标签页隐藏时停止渲染。</p>
+  </li>
+    
+  <li class="check-done spec-item">
+    <span class="spec-item-title">氛围参数初调</span>
+    <span class="spec-tags">config.ts · lake.ts · stars.ts</span>
+    <p class="spec-detail"><strong>做了什么：</strong>星密度、湖面反光与镜头速度已调为舒缓漫游。</p>
+  </li>
+  </ul>
+  <h2 class="text-lg text-slate-400">未完成</h2>
+  <p class="text-sm text-slate-500">无</p>
+</main>
+</div>
+</body>
+</html>

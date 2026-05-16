@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>星夜湖 Spec</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={theme:{extend:{colors:{lake:{DEFAULT:'#6eb8e8',dark:'#061428'}}}}}</script>
+  <link rel="stylesheet" href="css/specs.css" />
+</head>
+<body class="spec-body antialiased">
+<div class="flex min-h-screen flex-col lg:flex-row">
+<nav class="spec-nav shrink-0 border-b border-lake/20 bg-lake-dark/80 p-4 lg:w-56 lg:min-h-screen">
+  <p class="mb-3 text-xs uppercase tracking-widest text-lake">Spec</p>
+  <ul class="flex flex-col gap-1 text-sm">
+    <li><a href="index.html" class="is-active text-slate-200">索引</a></li>
+    <li><a href="phase-0-spike.html" class="text-slate-300">Phase 0</a></li>
+    <li><a href="phase-1-mvp-layers.html" class="text-slate-300">Phase 1</a></li>
+    <li><a href="phase-2-motion.html" class="text-slate-300">Phase 2</a></li>
+    <li><a href="phase-3-polish.html" class="text-slate-300">Phase 3</a></li>
+  </ul>
+</nav>
+<main class="spec-content flex-1 px-5 py-8 max-w-3xl">
+
+  <h1 class="text-3xl font-bold text-white mb-2">星夜湖 Spec 索引</h1>
+  <p class="spec-intro">主站背景是「星夜湖」：夜空与湖面由代码实时绘制，无外链插画。代码在 <code>web/src/scene/</code>。</p>
+  <p class="text-slate-400 mb-2">细项 25/26（约 96%）</p>
+  <div class="progress-bar mb-6"><div class="progress-bar__fill" style="width:96%"></div></div>
+  <div class="spec-phase-card mt-8">
+    <h3><a class="text-lake hover:underline" href="phase-0-spike.html">Phase 0 · 技术验证</a> — 7/7</h3>
+    <p>Three.js 全屏 + 星空/湖面 + HTML 叠层；Docker 与 GitHub Pages。</p>
+  </div>
+  <div class="spec-phase-card">
+    <h3><a class="text-lake hover:underline" href="phase-1-mvp-layers.html">Phase 1 · 星夜湖视觉</a> — 4/4</h3>
+    <p>星空粒子、湖面 shader、深蓝色相与轻雾，纯代码无素材文件。</p>
+  </div>
+  <div class="spec-phase-card">
+    <h3><a class="text-lake hover:underline" href="phase-2-motion.html">Phase 2 · 动画</a> — 7/7</h3>
+    <p>湖波、星光、镜头漫游、Shift 加速、减动效降级。</p>
+  </div>
+  <div class="spec-phase-card">
+    <h3><a class="text-lake hover:underline" href="phase-3-polish.html">Phase 3 · 打磨</a> — 7/8</h3>
+    <p>简洁模式、WebGL 兜底、性能与打包优化。</p>
+  </div>
+</main>
+</div>
+</body>
+</html>

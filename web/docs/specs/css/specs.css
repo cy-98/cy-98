@@ -1,0 +1,186 @@
+/* 星夜湖 Spec 文档 — 补充 Tailwind 的自定义样式 */
+
+:root {
+  --spec-bg: #030810;
+  --spec-surface: #0a1628;
+  --spec-border: rgba(110, 184, 232, 0.22);
+  --spec-accent: #6eb8e8;
+  --spec-text: #e8f0ff;
+  --spec-muted: #9ab0c8;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body.spec-body {
+  background: var(--spec-bg);
+  color: var(--spec-text);
+  min-height: 100vh;
+}
+
+.spec-nav a.is-active {
+  border-color: var(--spec-accent);
+  background: rgba(110, 184, 232, 0.12);
+  color: var(--spec-accent);
+}
+
+.spec-content pre {
+  background: #061018;
+  border: 1px solid var(--spec-border);
+  border-radius: 0.5rem;
+  padding: 1rem 1.25rem;
+  overflow-x: auto;
+  font-size: 0.85rem;
+  line-height: 1.55;
+}
+
+.spec-content code {
+  font-family: ui-monospace, 'Cascadia Code', Consolas, monospace;
+  font-size: 0.88em;
+}
+
+.spec-content :not(pre) > code {
+  background: rgba(110, 184, 232, 0.12);
+  padding: 0.15em 0.4em;
+  border-radius: 0.25rem;
+  color: var(--spec-accent);
+}
+
+.spec-content table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.spec-content th,
+.spec-content td {
+  border: 1px solid var(--spec-border);
+  padding: 0.6rem 0.75rem;
+  text-align: left;
+}
+
+.spec-content th {
+  background: var(--spec-surface);
+  color: var(--spec-accent);
+  font-weight: 600;
+}
+
+.spec-content tbody tr:nth-child(even) {
+  background: rgba(10, 22, 40, 0.5);
+}
+
+.check-done::before {
+  content: '✓ ';
+  color: #5eead4;
+}
+
+.check-todo::before {
+  content: '○ ';
+  color: var(--spec-muted);
+}
+
+.check-wip::before {
+  content: '◐ ';
+  color: #fbbf24;
+}
+
+.spec-checklist {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.spec-checklist li {
+  padding: 0.35rem 0;
+  border-bottom: 1px solid rgba(110, 184, 232, 0.08);
+  font-size: 0.9rem;
+}
+
+.spec-checklist li:last-child {
+  border-bottom: none;
+}
+
+.spec-effect {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--spec-muted);
+  margin-top: 0.15rem;
+  margin-left: 1.25rem;
+}
+
+.spec-checklist .spec-item {
+  padding: 0.85rem 0;
+}
+
+.spec-item-title {
+  display: block;
+  font-weight: 500;
+  color: var(--spec-text);
+  line-height: 1.35;
+}
+
+.spec-tags {
+  display: block;
+  margin-top: 0.25rem;
+  margin-left: 1.25rem;
+  font-size: 0.72rem;
+  font-family: ui-monospace, Consolas, monospace;
+  color: var(--spec-accent);
+  opacity: 0.9;
+}
+
+.spec-detail {
+  margin: 0.4rem 0 0 1.25rem;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: var(--spec-muted);
+}
+
+.spec-detail strong {
+  color: #c5d8ec;
+  font-weight: 600;
+}
+
+.spec-intro {
+  font-size: 0.9rem;
+  color: var(--spec-muted);
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+}
+
+.spec-phase-card {
+  border: 1px solid var(--spec-border);
+  border-radius: 0.5rem;
+  padding: 1rem 1.1rem;
+  margin-bottom: 1rem;
+  background: rgba(10, 22, 40, 0.45);
+}
+
+.spec-phase-card h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--spec-accent);
+  margin-bottom: 0.35rem;
+}
+
+.spec-phase-card p {
+  font-size: 0.82rem;
+  color: var(--spec-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.progress-bar {
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(110, 184, 232, 0.12);
+  overflow: hidden;
+  margin-top: 0.75rem;
+}
+
+.progress-bar__fill {
+  height: 100%;
+  background: var(--spec-accent);
+  border-radius: 999px;
+}

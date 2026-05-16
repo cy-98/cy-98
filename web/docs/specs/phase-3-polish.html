@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Phase 3</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={theme:{extend:{colors:{lake:{DEFAULT:'#6eb8e8',dark:'#061428'}}}}}</script>
+  <link rel="stylesheet" href="css/specs.css" />
+</head>
+<body class="spec-body antialiased">
+<div class="flex min-h-screen flex-col lg:flex-row">
+<nav class="spec-nav shrink-0 border-b border-lake/20 bg-lake-dark/80 p-4 lg:w-56 lg:min-h-screen">
+  <p class="mb-3 text-xs uppercase tracking-widest text-lake">Spec</p>
+  <ul class="flex flex-col gap-1 text-sm">
+    <li><a href="index.html" class="text-slate-300">索引</a></li>
+    <li><a href="phase-0-spike.html" class="text-slate-300">Phase 0</a></li>
+    <li><a href="phase-1-mvp-layers.html" class="text-slate-300">Phase 1</a></li>
+    <li><a href="phase-2-motion.html" class="text-slate-300">Phase 2</a></li>
+    <li><a href="phase-3-polish.html" class="is-active text-slate-200">Phase 3</a></li>
+  </ul>
+</nav>
+<main class="spec-content flex-1 px-5 py-8 max-w-3xl">
+
+  <h1 class="text-3xl font-bold text-white mb-2">Phase 3 打磨</h1>
+  <p class="spec-intro">目标：宽容低性能、无 WebGL 环境，以及上线质量。</p>
+  <p class="text-slate-400 mb-4">7/8 · 88%</p>
+  <div class="progress-bar mb-6"><div class="progress-bar__fill" style="width:88%"></div></div>
+  <h2 class="text-lg text-teal-300 mb-3 mt-6">已完成</h2>
+  <ul class="spec-checklist text-slate-300 mb-6">
+    
+  <li class="check-done spec-item">
+    <span class="spec-item-title">runtime-mode</span>
+    <span class="spec-tags">runtime-mode.ts</span>
+    <p class="spec-detail"><strong>做了什么：</strong>简洁模式、减动效、低性能自动静态背景。</p>
+  </li>
+    
+  <li class="check-done spec-item">
+    <span class="spec-item-title">静态 CSS 背景</span>
+    <span class="spec-tags">static-fallback.ts</span>
+    <p class="spec-detail"><strong>做了什么：</strong>简洁模式用深蓝渐变，无强依赖外链图。</p>
+  </li>
+    
+  <li class="check-done spec-item">
+    <span class="spec-item-title">简洁模式开关</span>
+    <span class="spec-tags">overlay.ts</span>
+    <p class="spec-detail"><strong>做了什么：</strong>localStorage 切换静态/动态。</p>
+  </li>
+    
+  <li class="check-done spec-item">
+    <span class="spec-item-title">WebGL 失败兜底</span>
+    <span class="spec-tags">main.ts</span>
+    <p class="spec-detail"><strong>做了什么：</strong>init 失败时仍显示静态背景与 UI。</p>
+  </li>
+    
+  <li class="check-done spec-item">
+    <span class="spec-item-title">maxDpr 限制</span>
+    <span class="spec-tags">config.maxDpr</span>
+    <p class="spec-detail"><strong>做了什么：</strong>高分屏不超 2x 渲染。</p>
+  </li>
+    
+  <li class="check-done spec-item">
+    <span class="spec-item-title">three 分包</span>
+    <span class="spec-tags">vite.config.ts</span>
+    <p class="spec-detail"><strong>做了什么：</strong>manualChunks 利用缓存。</p>
+  </li>
+    
+  <li class="check-done spec-item">
+    <span class="spec-item-title">湖面环境音（勾选）</span>
+    <span class="spec-tags">ambient-sound.ts · overlay.ts</span>
+    <p class="spec-detail"><strong>做了什么：</strong>Web Audio 程序化环境音，默认关闭，勾选开启。</p>
+  </li>
+  </ul>
+  <h2 class="text-lg text-amber-300 mb-3">未完成</h2>
+  <ul class="spec-checklist text-slate-300">
+    
+  <li class="check-todo spec-item">
+    <span class="spec-item-title">Lighthouse 验收</span>
+    <span class="spec-tags">Pages</span>
+    <p class="spec-detail"><strong>还差什么：</strong>记录 LCP / CLS 基线。</p>
+  </li>
+  </ul>
+</main>
+</div>
+</body>
+</html>
