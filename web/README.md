@@ -1,6 +1,15 @@
 # Personal site (`web/`)
 
-Vite + TypeScript 个人站，部署到 GitHub Pages：**https://cy-98.github.io/cy-98/**
+Vite + TypeScript + Three.js 个人站（星夜湖 · 借火岩 2.5D 整站背景），部署到 GitHub Pages：**https://cy-98.github.io/cy-98/**
+
+## 场景
+
+- 全屏 WebGL：星空、湖面 shader、相机前移与船摇
+- 分层插画：老君、青凝、借火岩、火焰、船舷（程序生成占位，可替换 `public/scene/*.webp`）
+- UI 叠层：毛玻璃面板上的导航与说明
+- `prefers-reduced-motion` 降低动画；移动端减少粒子数
+
+分阶段说明与调参入口见 **[docs/specs/](./docs/specs/README.md)**（四个 phase spec 文件）。
 
 ## 本地预览（Docker）
 
