@@ -286,12 +286,6 @@ h1 {
   background: var(--accent-soft);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .hint::after {
-    content: ' （已检测到减少动效偏好，场景动画已降低）';
-  }
-}
-
 @media (max-width: 768px) {
   .ui-inner {
     padding: 1rem 0.75rem 2rem;
