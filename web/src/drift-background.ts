@@ -1,26 +1,28 @@
-const DEFAULT_DRIFT_URL = 'https://cy-98.github.io/drift/'
+import './drift/drift-base.css'
+import { createDriftShell } from './drift/shell'
+import { bootDriftEmbed, type SiteBootstrapHandle } from './drift/site-bootstrap'
 
 export interface DriftBackgroundHandle {
   dispose: () => void
 }
 
-/** 全屏 iframe 嵌入 Drift，作为个人站背景层。 */
-export function mountDriftBackground(
-  container: HTMLElement,
-  url = import.meta.env.VITE_DRIFT_URL ?? DEFAULT_DRIFT_URL,
-): DriftBackgroundHandle {
-  const iframe = document.createElement('iframe')
-  iframe.id = 'drift-bg'
-  iframe.src = url
-  iframe.title = 'Drift — 星际漫游'
-  iframe.setAttribute('allow', 'fullscreen')
-  iframe.loading = 'eager'
-  iframe.tabIndex = -1
-  container.replaceChildren(iframe)
+/** 在个人站背景层直接启动 Drift（引用 web/drift 子模块源码）。 */
+export async function mountDriftBackground(container: HTMLElement): Promise<DriftBackgroundHandle> {
+  const shell = createDriftShell()
+  container.replaceChildren(shell)
+
+  let boot: SiteBootstrapHandle | null = null
+  try {
+    boot = await bootDriftEmbed(shell)
+  } catch (err) {
+    console.error('[site] Drift background failed', err)
+    shell.querySelector('.drift-webgl-error')?.classList.add('show')
+  }
 
   return {
     dispose() {
-      iframe.remove()
+      boot?.dispose()
+      shell.remove()
     },
   }
 }

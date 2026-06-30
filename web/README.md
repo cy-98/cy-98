@@ -1,13 +1,21 @@
 # Personal site (`web/`)
 
-Vite + TypeScript 个人站，**Drift 星际漫游**作全屏背景（iframe），毛玻璃主页叠层在上，部署到 GitHub Pages：**https://cy-98.github.io/cy-98/**
+Vite + TypeScript 个人站，**Drift 源码**（`web/drift/` 子模块）作全屏背景，毛玻璃主页叠层在上，部署到 GitHub Pages：**https://cy-98.github.io/cy-98/**
 
 ## 场景
 
-- 全屏 iframe 嵌入 [Drift](https://cy-98.github.io/drift/)（程序化星野 + 湖面）
-- 面板外区域可与 Drift 交互（WASD、Enter、Esc 等）
-- UI 叠层：毛玻璃面板上的导航与说明；空闲时自动半透明
-- 不再使用本仓库内的星夜湖 Three.js 场景（代码仍保留在 `src/scene/`）
+- 直接引用 [Drift](https://github.com/cy-98/drift) 子模块源码，经 Vite 打包为同源背景（无 iframe）
+- 面板外区域可与 Drift 交互（WASD、Enter 等）；Drift 自带 HUD / loading 在嵌入模式下隐藏
+- UI 叠层：毛玻璃面板；空闲时自动半透明
+- 静态资源（`data/`、`public/`）发布到 `/cy-98/drift/`
+
+### 子模块
+
+```bash
+git submodule update --init --recursive
+```
+
+更新 Drift：`cd web/drift && git pull origin master`，然后在仓库根目录提交子模块指针。
 
 分阶段 Spec（HTML）：**[docs/specs/index.html](./docs/specs/index.html)**。项目 Skill：`.cursor/skills/canvas/`。
 

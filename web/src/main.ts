@@ -9,9 +9,18 @@ if (!bgRoot || !uiRoot) {
   throw new Error('Missing #bg-root or #ui-root')
 }
 
-const drift = mountDriftBackground(bgRoot)
 mountOverlay(uiRoot)
 
+let drift: { dispose: () => void } | null = null
+
+mountDriftBackground(bgRoot)
+  .then((handle) => {
+    drift = handle
+  })
+  .catch((err) => {
+    console.error('[site] failed to mount Drift', err)
+  })
+
 window.addEventListener('beforeunload', () => {
-  drift.dispose()
+  drift?.dispose()
 })

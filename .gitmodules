@@ -1,0 +1,4 @@
+[submodule "web/drift"]
+	path = web/drift
+	url = https://github.com/cy-98/drift.git
+	branch = master
