@@ -119,14 +119,21 @@ body {
 .ui-root {
   position: relative;
   z-index: 1;
+  box-sizing: border-box;
   min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 1.25rem;
   pointer-events: none;
 }
 
 .ui-inner {
+  width: 100%;
   max-width: 40rem;
-  margin: 0 auto;
-  padding: 1.75rem 1.25rem 3rem;
+  margin: 0;
+  padding: 0;
   pointer-events: none;
   transition: opacity 0.8s ease;
 }
@@ -149,6 +156,7 @@ body {
 .hero {
   margin-bottom: 1.25rem;
   padding: 1.5rem 1.5rem 1.25rem;
+  text-align: center;
 }
 
 .eyebrow {
@@ -174,7 +182,7 @@ h1 {
 }
 
 .lead {
-  margin: 0 0 1.25rem;
+  margin: 0 auto 1.25rem;
   font-size: 1rem;
   color: var(--muted);
   max-width: 38ch;
@@ -183,6 +191,7 @@ h1 {
 .links {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 0.65rem;
 }
 
@@ -205,6 +214,7 @@ h1 {
 .panel {
   margin-bottom: 1.25rem;
   padding: 1.1rem 1.35rem;
+  text-align: center;
 }
 
 .panel h2 {
@@ -269,6 +279,7 @@ h1 {
   padding: 1rem 1.35rem;
   font-size: 0.82rem;
   color: var(--muted);
+  text-align: center;
 }
 
 .footer p {
@@ -299,8 +310,9 @@ h1 {
 }
 
 @media (max-width: 768px) {
-  .ui-inner {
-    padding: 1rem 0.75rem 2rem;
+  .ui-root {
+    padding: 1rem 0.75rem;
+    align-items: safe center;
   }
 
   .hero,
