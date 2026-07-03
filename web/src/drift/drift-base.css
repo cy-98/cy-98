@@ -97,3 +97,8 @@
 .drift-mount #touch-ui {
   display: none !important;
 }
+
+.drift-mount.drift-passive,
+.drift-mount.drift-passive #drift-canvas {
+  pointer-events: none;
+}

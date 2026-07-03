@@ -9,6 +9,7 @@ import { createTouch } from '../../drift/src/platform/web/touch.js'
 import { createGamepad } from '../../drift/src/platform/web/gamepad.js'
 import { createWebNarration } from '../../drift/src/platform/web/narration-web.js'
 import { loadGalaxyCatalog } from '../../drift/src/core/galaxy-loader.js'
+import { isDesktopPointer } from './desktop-passive'
 
 declare global {
   interface Window {
@@ -110,6 +111,7 @@ export async function bootDriftEmbed(mount: HTMLElement): Promise<SiteBootstrapH
   }
 
   const onKeydown = (e: KeyboardEvent) => {
+    if (isDesktopPointer()) return
     if (inSiteUi(e.target)) return
     if (!app?.ok) return
     if (e.key.toLowerCase() === 'tab') {
@@ -150,6 +152,8 @@ export async function bootDriftEmbed(mount: HTMLElement): Promise<SiteBootstrapH
       createInput: (c: HTMLCanvasElement, cam: unknown, getS: () => Record<string, unknown>, h: unknown, opts: Record<string, unknown>) => {
         const inp = createWebInput(c, cam, getS, h, {
           ...opts,
+          // PC 端禁用漫游操作与镜头控制，避免挡住主页点击。
+          canStart: () => !isDesktopPointer(),
           onEscape: () => {
             if (mount.classList.contains('photo-mode')) app?.togglePhotoMode?.()
           },
@@ -172,6 +176,10 @@ export async function bootDriftEmbed(mount: HTMLElement): Promise<SiteBootstrapH
   } else {
     webglError?.classList.remove('show')
     webglError?.setAttribute('hidden', '')
+    if (isDesktopPointer()) {
+      document.exitPointerLock?.()
+      mount.classList.add('drift-passive')
+    }
   }
 
   return {

@@ -286,6 +286,18 @@ h1 {
   background: var(--accent-soft);
 }
 
+@media (hover: hover) and (pointer: fine) {
+  #bg-root,
+  .drift-mount {
+    pointer-events: none;
+  }
+
+  .ui-root,
+  .ui-inner {
+    pointer-events: auto;
+  }
+}
+
 @media (max-width: 768px) {
   .ui-inner {
     padding: 1rem 0.75rem 2rem;

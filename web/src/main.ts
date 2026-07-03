@@ -1,6 +1,10 @@
 import './style.css'
 import { mountDriftBackground } from './drift-background'
+import { onDesktopPointerChange, syncDesktopPassiveClass } from './drift/desktop-passive'
 import { mountOverlay } from './ui/overlay'
+
+syncDesktopPassiveClass()
+const stopDesktopSync = onDesktopPointerChange(syncDesktopPassiveClass)
 
 const bgRoot = document.querySelector<HTMLElement>('#bg-root')
 const uiRoot = document.querySelector<HTMLElement>('#ui-root')
@@ -22,5 +26,6 @@ mountDriftBackground(bgRoot)
   })
 
 window.addEventListener('beforeunload', () => {
+  stopDesktopSync()
   drift?.dispose()
 })
