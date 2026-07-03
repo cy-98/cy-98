@@ -1,16 +1,8 @@
-/** 带精确指针的设备（典型 PC 鼠标）— 背景仅观赏，不接管操作。 */
-export const DESKTOP_POINTER_MQ = '(hover: hover) and (pointer: fine)'
-
-export function isDesktopPointer(): boolean {
-  return window.matchMedia(DESKTOP_POINTER_MQ).matches
+/** 个人站嵌入 Drift — 各端背景均为被动观赏，不接管操作。 */
+export function isEmbedPassive(): boolean {
+  return true
 }
 
-export function syncDesktopPassiveClass(): void {
-  document.documentElement.classList.toggle('site-desktop-passive', isDesktopPointer())
-}
-
-export function onDesktopPointerChange(listener: () => void): () => void {
-  const mq = window.matchMedia(DESKTOP_POINTER_MQ)
-  mq.addEventListener('change', listener)
-  return () => mq.removeEventListener('change', listener)
+export function syncEmbedPassiveClass(): void {
+  document.documentElement.classList.add('site-embed-passive')
 }

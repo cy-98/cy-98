@@ -5,7 +5,7 @@ Vite + TypeScript 个人站，**Drift 源码**（`web/drift/` 子模块）作全
 ## 场景
 
 - 直接引用 [Drift](https://github.com/cy-98/drift) 子模块源码，经 Vite 打包为同源背景（无 iframe）
-- 手机端面板外显示触控摇杆与环顾区；电脑端背景仅观赏。Drift 自带 HUD / loading 在嵌入模式下隐藏
+- 各端背景均为被动观赏，不可操作；Drift 自带 HUD / loading 在嵌入模式下隐藏
 - UI 叠层：毛玻璃面板；空闲时自动半透明
 - 静态资源（`data/`、`public/`）发布到 `/cy-98/drift/`
 

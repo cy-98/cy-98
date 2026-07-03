@@ -5,11 +5,9 @@ import { createDomHud } from '../../drift/src/platform/web/dom-hud.js'
 import { initWebMonitor } from '../../drift/src/platform/web/monitor-web.js'
 import { createDriftApp } from '../../drift/src/core/drift-app.js'
 import { createWebInput } from '../../drift/src/platform/web/input-web.js'
-import { createTouch } from '../../drift/src/platform/web/touch.js'
 import { createGamepad } from '../../drift/src/platform/web/gamepad.js'
 import { createWebNarration } from '../../drift/src/platform/web/narration-web.js'
 import { loadGalaxyCatalog } from '../../drift/src/core/galaxy-loader.js'
-import { isDesktopPointer } from './desktop-passive'
 
 declare global {
   interface Window {
@@ -99,25 +97,12 @@ export async function bootDriftEmbed(mount: HTMLElement): Promise<SiteBootstrapH
 
   const inputHolder: { current: ReturnType<typeof createWebInput> | null } = { current: null }
   const gamepad = createGamepad()
-  const touch = createTouch(() => (app?.ok ? app.getSettings() : {}), {
-    onEngage: () => inputHolder.current?.requestEngage?.(),
-  })
 
   let app: ReturnType<typeof createDriftApp> | { ok: false; error?: unknown } | null = null
   const loadStart = performance.now()
 
   const onResize = () => {
     if (app?.ok) app.resize()
-  }
-
-  const onKeydown = (e: KeyboardEvent) => {
-    if (isDesktopPointer()) return
-    if (inSiteUi(e.target)) return
-    if (!app?.ok) return
-    if (e.key.toLowerCase() === 'tab') {
-      e.preventDefault()
-      app.cycleNavTarget()
-    }
   }
 
   mount.addEventListener(
@@ -135,7 +120,6 @@ export async function bootDriftEmbed(mount: HTMLElement): Promise<SiteBootstrapH
   })
 
   window.addEventListener('resize', onResize)
-  window.addEventListener('keydown', onKeydown)
 
   try {
     await loadGalaxyCatalog()
@@ -145,19 +129,18 @@ export async function bootDriftEmbed(mount: HTMLElement): Promise<SiteBootstrapH
       hud,
       platform,
       monitor,
-      touch,
+      touch: null,
       gamepad,
       loadStart,
       createNarration: createWebNarration,
       createInput: (c: HTMLCanvasElement, cam: unknown, getS: () => Record<string, unknown>, h: unknown, opts: Record<string, unknown>) => {
         const inp = createWebInput(c, cam, getS, h, {
           ...opts,
-          // PC 端禁用漫游操作与镜头控制，避免挡住主页点击。
-          canStart: () => !isDesktopPointer(),
+          canStart: () => false,
           onEscape: () => {
             if (mount.classList.contains('photo-mode')) app?.togglePhotoMode?.()
           },
-          touch,
+          touch: null,
           gamepad,
         })
         inputHolder.current = inp
@@ -176,16 +159,13 @@ export async function bootDriftEmbed(mount: HTMLElement): Promise<SiteBootstrapH
   } else {
     webglError?.classList.remove('show')
     webglError?.setAttribute('hidden', '')
-    if (isDesktopPointer()) {
-      document.exitPointerLock?.()
-      mount.classList.add('drift-passive')
-    }
+    document.exitPointerLock?.()
+    mount.classList.add('drift-passive')
   }
 
   return {
     dispose() {
       window.removeEventListener('resize', onResize)
-      window.removeEventListener('keydown', onKeydown)
       app?.endSession?.()
     },
   }
