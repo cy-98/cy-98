@@ -93,9 +93,55 @@
 }
 
 .drift-settings-stub,
-.drift-mount #ui,
-.drift-mount #touch-ui {
+.drift-mount #ui {
   display: none !important;
+}
+
+.drift-mount #touch-ui {
+  position: fixed;
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;
+  display: none;
+}
+
+body.touch-ui .drift-mount #touch-ui {
+  display: block;
+}
+
+.drift-mount .touch-stick {
+  position: absolute;
+  width: 110px;
+  height: 110px;
+  left: 18px;
+  bottom: 22px;
+  border-radius: 50%;
+  border: 1px solid rgba(110, 184, 232, 0.35);
+  background: rgba(6, 16, 32, 0.45);
+  pointer-events: auto;
+  touch-action: none;
+}
+
+.drift-mount .touch-stick-knob {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  left: 50%;
+  top: 50%;
+  margin: -22px 0 0 -22px;
+  border-radius: 50%;
+  background: rgba(110, 184, 232, 0.35);
+  border: 1px solid rgba(110, 184, 232, 0.55);
+}
+
+.drift-mount .touch-look {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 48%;
+  height: 100%;
+  pointer-events: auto;
+  touch-action: none;
 }
 
 .drift-mount.drift-passive,

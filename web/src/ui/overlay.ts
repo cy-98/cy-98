@@ -24,7 +24,8 @@ export function mountOverlay(root: HTMLElement): void {
     </header>
     <section class="panel glass" aria-labelledby="hint-heading">
       <h2 id="hint-heading">操作提示</h2>
-      <p class="hint">${LORE.hint}</p>
+      <p class="hint hint--desktop">${LORE.hintDesktop}</p>
+      <p class="hint hint--mobile">${LORE.hintMobile}</p>
     </section>
     <footer class="footer glass">
       <p>
