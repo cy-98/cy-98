@@ -13,7 +13,7 @@ export function createDriftShell(): HTMLElement {
     <div id="boost-edge" aria-hidden="true"></div>
     <div id="compass" aria-hidden="true"></div>
     <div id="lore" class="lore-md" hidden aria-hidden="true"><strong></strong><p></p></div>
-    <div id="touch-ui" hidden aria-hidden="true">
+    <div id="touch-ui" aria-hidden="true">
       <div class="touch-stick" id="move-stick"><span class="touch-stick-knob" id="move-knob"></span></div>
       <div class="touch-look" id="look-zone"></div>
     </div>

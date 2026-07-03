@@ -297,16 +297,9 @@ h1 {
   background: var(--accent-soft);
 }
 
-@media (hover: hover) and (pointer: fine) {
-  #bg-root,
-  .drift-mount {
-    pointer-events: none;
-  }
-
-  .ui-root,
-  .ui-inner {
-    pointer-events: auto;
-  }
+.site-embed-passive #bg-root,
+.site-embed-passive .drift-mount {
+  pointer-events: none;
 }
 
 @media (max-width: 768px) {
