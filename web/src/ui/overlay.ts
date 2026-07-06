@@ -28,7 +28,8 @@ export function mountOverlay(root: HTMLElement): void {
     </section>
     <footer class="footer glass">
       <p>
-        <a href="${driftHref}" target="_blank" rel="noreferrer">Drift 项目</a>
+        <a href="mailto:yue.cai0032@qq.com">yue.cai0032@qq.com</a>
+        · <a href="${driftHref}" target="_blank" rel="noreferrer">Drift 项目</a>
         · <a href="${specsHref}">本站 Spec</a>
         · <a href="${driftSpecHref}" target="_blank" rel="noreferrer">Drift Spec</a>
       </p>
