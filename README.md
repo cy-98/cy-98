@@ -4,7 +4,7 @@
 - 🐢 [My thoughts here](https://docs.page/cy-98/cy-docs)
 - 🌐 [Personal site](https://cy-98.github.io/cy-98/) — Drift 星际漫游背景（见 [`web/`](web/)）
 - 🛸 [Drift](https://cy-98.github.io/drift/) — 第一人称星际漫游
-- 📫 Reach me: wechat 18747099166.
+- 📫 Reach me: yue.cai0032@qq.com · wechat 18747099166.
 
 <!---
 cy-98/cy-98 is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
