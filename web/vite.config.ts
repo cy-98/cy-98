@@ -23,6 +23,9 @@ function driftAssetMiddleware(
   if (!url.startsWith(prefix)) return next()
 
   const rel = decodeURIComponent(url.slice(prefix.length))
+  // Only static Drift assets (data/public). Source JS/CSS must go through Vite.
+  if (!rel.startsWith('data/') && !rel.startsWith('public/')) return next()
+
   const file = path.normalize(path.join(driftDir, rel))
   if (!file.startsWith(driftDir) || !fs.existsSync(file) || !fs.statSync(file).isFile()) {
     return next()

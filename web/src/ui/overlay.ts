@@ -12,14 +12,18 @@ export function mountOverlay(root: HTMLElement): void {
   inner.innerHTML = `
     <header class="hero glass">
       <p class="eyebrow">${LORE.place}</p>
-      <h1>才越 <span class="handle">@cy-98</span></h1>
-      <nav class="links" aria-label="主要链接">
-        <a href="https://cy-98.github.io/markdown-cv/" target="_blank" rel="noreferrer">简历</a>
-        <a href="#notes">随笔</a>
-        <a href="${driftHref}" target="_blank" rel="noreferrer">漫游</a>
-        <a href="https://github.com/cy-98" target="_blank" rel="noreferrer">GitHub</a>
-      </nav>
-      ${renderHomeNoteList()}
+      <h1>
+        <a class="brand" href="#notes">才越 <span class="handle">@cy-98</span></a>
+      </h1>
+      <div class="hero-stack">
+        <nav class="links" aria-label="主要链接">
+          <a href="https://cy-98.github.io/markdown-cv/" target="_blank" rel="noreferrer">简历</a>
+          <a href="#notes">随笔</a>
+          <a href="${driftHref}" target="_blank" rel="noreferrer">漫游</a>
+          <a href="https://github.com/cy-98" target="_blank" rel="noreferrer">GitHub</a>
+        </nav>
+        ${renderHomeNoteList()}
+      </div>
     </header>
     <div data-article-root></div>
   `
@@ -27,15 +31,21 @@ export function mountOverlay(root: HTMLElement): void {
   root.appendChild(inner)
 
   const articleRoot = inner.querySelector<HTMLElement>('[data-article-root]')
+  const notesSection = inner.querySelector<HTMLElement>('.home-notes')
   if (!articleRoot) {
     throw new Error('Missing article root')
   }
 
   const renderArticle = (scrollToArticle: boolean) => {
     const note = articleFromHash(window.location.hash)
+    const reading = Boolean(note)
+    root.classList.toggle('is-reading', reading)
+    if (notesSection) {
+      notesSection.hidden = reading
+    }
     articleRoot.innerHTML = note ? renderNoteArticle(note) : ''
     if (scrollToArticle && note) {
-      articleRoot.querySelector('.note-article')?.scrollIntoView({ block: 'start' })
+      window.scrollTo({ top: 0 })
     }
   }
 

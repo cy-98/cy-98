@@ -2,3 +2,6 @@
 	path = web/drift
 	url = https://github.com/cy-98/drift.git
 	branch = master
+[submodule "web/cy-docs"]
+	path = web/cy-docs
+	url = https://github.com/cy-98/cy-docs.git

@@ -1,6 +1,6 @@
 import { escapeHtml } from '../content/escape'
 import { findNote, NOTES } from '../content/notes'
-import type { Note, NoteBlock } from '../content/note'
+import type { Note } from '../content/note'
 
 export function parseNoteSlug(hash: string): string | null {
   const match = /^#notes\/([^/]+)$/.exec(hash)
@@ -15,23 +15,6 @@ export function parseNoteSlug(hash: string): string | null {
 function formatDate(iso: string): string {
   const [year, month] = iso.split('-')
   return `${year}.${month}`
-}
-
-function renderBlocks(blocks: readonly NoteBlock[]): string {
-  return blocks
-    .map((block) => {
-      switch (block.type) {
-        case 'p':
-          return `<p>${escapeHtml(block.text)}</p>`
-        case 'h3':
-          return `<h3>${escapeHtml(block.text)}</h3>`
-        case 'quote':
-          return `<blockquote>${escapeHtml(block.text)}</blockquote>`
-        case 'ul':
-          return `<ul>${block.items.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>`
-      }
-    })
-    .join('')
 }
 
 export function renderHomeNoteList(): string {
@@ -60,7 +43,7 @@ export function renderNoteArticle(note: Note): string {
       <p class="note-back"><a href="#notes">返回列表</a></p>
       <h2 id="note-title">${escapeHtml(note.title)}</h2>
       <time class="note-date" datetime="${note.date}">${formatDate(note.date)}</time>
-      <div class="note-body">${renderBlocks(note.body)}</div>
+      <div class="note-body">${note.bodyHtml}</div>
     </article>
   `
 }

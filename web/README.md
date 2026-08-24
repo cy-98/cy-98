@@ -15,15 +15,17 @@ Vite + TypeScript 个人站，**Drift 源码**（`web/drift/` 子模块）作全
 git submodule update --init --recursive
 ```
 
-更新 Drift：`cd web/drift && git pull origin master`，然后在仓库根目录提交子模块指针。
+- **Drift**（`web/drift/`）：背景引擎。更新：`cd web/drift && git pull origin master`，然后在仓库根目录提交子模块指针。
+- **cy-docs**（`web/cy-docs/`）：随笔 Markdown/MDX 源（[cy-98/cy-docs](https://github.com/cy-98/cy-docs)）。`npm run dev` / `npm run build` 前会自动执行 `npm run sync:notes`，从子模块生成 `src/content/generated/notes.ts`。要收录新文章，编辑 `web/scripts/cy-docs-notes.json` 里的文件清单与日期。
 
 分阶段 Spec（HTML）：**[docs/specs/index.html](./docs/specs/index.html)**。项目 Skill：`.cursor/skills/canvas/`。
 
 ## 本地预览（Docker）
 
-仓库根目录：
+仓库根目录先初始化子模块（`web/drift`、`web/cy-docs`），再启动：
 
 ```bash
+git submodule update --init --recursive
 docker compose up
 ```
 

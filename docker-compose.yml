@@ -8,4 +8,7 @@ services:
       - "5173:5173"
     environment:
       VITE_BASE: /
-    command: sh -c "npm install && npm run dev -- --host 0.0.0.0"
+    # Host must init submodules first: git submodule update --init --recursive
+    command: >-
+      sh -c "test -d cy-docs/docs || { echo 'Missing web/cy-docs. Run: git submodule update --init --recursive'; exit 1; };
+      npm install && npm run dev -- --host 0.0.0.0"
