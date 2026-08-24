@@ -20,10 +20,12 @@
 html,
 body {
   margin: 0;
-  height: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
   overflow-x: hidden;
   background: #030810;
   color: var(--text);
+  scroll-padding-top: 1.25rem;
 }
 
 #bg-root {
@@ -123,7 +125,7 @@ body {
   min-height: 100vh;
   min-height: 100dvh;
   display: flex;
-  align-items: center;
+  align-items: safe center;
   justify-content: center;
   padding: 1.5rem 1.25rem;
   pointer-events: none;
@@ -215,6 +217,113 @@ h1 {
   margin-bottom: 1.25rem;
   padding: 1.1rem 1.35rem;
   text-align: center;
+}
+
+.panel--list {
+  text-align: left;
+}
+
+.panel--list h2 {
+  text-align: left;
+}
+
+.note-list {
+  list-style: none;
+  margin: 0.35rem 0 0;
+  padding: 0;
+}
+
+.note-list li + li {
+  border-top: 1px solid var(--glass-border);
+}
+
+.note-item {
+  display: grid;
+  gap: 0.15rem;
+  padding: 0.85rem 0.1rem;
+  color: inherit;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background 0.15s;
+}
+
+.note-item:hover {
+  background: var(--accent-soft);
+}
+
+.note-item:hover .note-title {
+  color: var(--accent);
+}
+
+.note-date {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+}
+
+.note-title {
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: var(--text);
+  transition: color 0.15s;
+}
+
+.note-excerpt {
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.note-back {
+  margin: 0 0 0.65rem;
+}
+
+.note-back a {
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 0.82rem;
+}
+
+.note-back a:hover {
+  text-decoration: underline;
+}
+
+.note-article .note-date {
+  display: block;
+  margin: 0.1rem 0 0.35rem;
+}
+
+.note-body {
+  margin-top: 0.65rem;
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+.note-body h3 {
+  margin: 1.05rem 0 0.35rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.note-body p {
+  margin: 0 0 0.75rem;
+}
+
+.note-body blockquote {
+  margin: 0 0 0.9rem;
+  padding: 0 0 0 0.85rem;
+  border-left: 2px solid var(--glass-border);
+  color: var(--text);
+}
+
+.note-body ul {
+  margin: 0 0 0.75rem;
+  padding-left: 1.15rem;
+}
+
+.note-body li {
+  margin: 0.2rem 0;
 }
 
 .panel h2 {
@@ -312,7 +421,6 @@ h1 {
 @media (max-width: 768px) {
   .ui-root {
     padding: 1rem 0.75rem;
-    align-items: safe center;
   }
 
   .hero,
