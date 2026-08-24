@@ -34,30 +34,30 @@ function renderBlocks(blocks: readonly NoteBlock[]): string {
     .join('')
 }
 
-function renderNoteList(): string {
-  const items = NOTES.map(
-    (note) => `
+export function renderHomeNoteList(): string {
+  const items = NOTES.map((note) => {
+    const href = `#notes/${encodeURIComponent(note.slug)}`
+    return `
       <li>
-        <a class="note-item" href="#notes/${encodeURIComponent(note.slug)}">
+        <a class="note-item" href="${href}">
           <time class="note-date" datetime="${note.date}">${formatDate(note.date)}</time>
           <span class="note-title">${escapeHtml(note.title)}</span>
-          <span class="note-excerpt">${escapeHtml(note.excerpt)}</span>
         </a>
-      </li>`,
-  ).join('')
+      </li>`
+  }).join('')
 
   return `
-    <section class="panel panel--list glass" id="notes" aria-labelledby="notes-heading">
+    <section class="home-notes" id="notes" aria-labelledby="notes-heading">
       <h2 id="notes-heading">随笔</h2>
       <ul class="note-list">${items}</ul>
     </section>
   `
 }
 
-function renderNoteArticle(note: Note): string {
+export function renderNoteArticle(note: Note): string {
   return `
-    <article class="panel panel--list glass note-article" id="notes" aria-labelledby="note-title">
-      <p class="note-back"><a href="#notes">返回随笔</a></p>
+    <article class="panel panel--list glass note-article" aria-labelledby="note-title">
+      <p class="note-back"><a href="#notes">返回列表</a></p>
       <h2 id="note-title">${escapeHtml(note.title)}</h2>
       <time class="note-date" datetime="${note.date}">${formatDate(note.date)}</time>
       <div class="note-body">${renderBlocks(note.body)}</div>
@@ -65,8 +65,7 @@ function renderNoteArticle(note: Note): string {
   `
 }
 
-export function renderNotesPanel(hash: string): string {
+export function articleFromHash(hash: string): Note | undefined {
   const slug = parseNoteSlug(hash)
-  const note = slug ? findNote(slug) : undefined
-  return note ? renderNoteArticle(note) : renderNoteList()
+  return slug ? findNote(slug) : undefined
 }

@@ -1,5 +1,5 @@
 import { LORE } from '../scene/lore'
-import { renderNotesPanel } from './notes'
+import { articleFromHash, renderHomeNoteList, renderNoteArticle } from './notes'
 
 const DEFAULT_DRIFT_URL = 'https://cy-98.github.io/drift/'
 
@@ -19,27 +19,28 @@ export function mountOverlay(root: HTMLElement): void {
         <a href="${driftHref}" target="_blank" rel="noreferrer">漫游</a>
         <a href="https://github.com/cy-98" target="_blank" rel="noreferrer">GitHub</a>
       </nav>
+      ${renderHomeNoteList()}
     </header>
-    <div data-notes-root></div>
+    <div data-article-root></div>
   `
 
   root.appendChild(inner)
 
-  const notesRoot = inner.querySelector<HTMLElement>('[data-notes-root]')
-  if (!notesRoot) {
-    throw new Error('Missing notes root')
+  const articleRoot = inner.querySelector<HTMLElement>('[data-article-root]')
+  if (!articleRoot) {
+    throw new Error('Missing article root')
   }
 
-  const renderNotes = () => {
-    const hash = window.location.hash
-    notesRoot.innerHTML = renderNotesPanel(hash)
-    if (hash === '#notes' || hash.startsWith('#notes/')) {
-      notesRoot.querySelector('#notes')?.scrollIntoView({ block: 'start' })
+  const renderArticle = (scrollToArticle: boolean) => {
+    const note = articleFromHash(window.location.hash)
+    articleRoot.innerHTML = note ? renderNoteArticle(note) : ''
+    if (scrollToArticle && note) {
+      articleRoot.querySelector('.note-article')?.scrollIntoView({ block: 'start' })
     }
   }
 
-  renderNotes()
-  window.addEventListener('hashchange', renderNotes)
+  renderArticle(false)
+  window.addEventListener('hashchange', () => renderArticle(true))
 
   let idleTimer = 0
   const onActivity = () => {
