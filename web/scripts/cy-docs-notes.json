@@ -1,12 +1,17 @@
 [
   {
+    "file": "remote agent vs local agent.md",
+    "slug": "remote-vs-local-agent",
+    "date": "2026-08-29"
+  },
+  {
     "file": "complete agentic.md",
     "slug": "complete-agentic",
-    "date": "2026-08-26"
+    "date": "2026-07-26"
   },
   {
     "file": "agent role evolution.md",
     "slug": "agent-role-evolution",
-    "date": "2026-08-25"
+    "date": "2026-07-25"
   }
 ]

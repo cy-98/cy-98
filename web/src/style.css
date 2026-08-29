@@ -174,9 +174,9 @@ body {
 
 .hero-head {
   display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 1.25rem;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.65rem;
   width: 100%;
 }
 
@@ -186,6 +186,16 @@ body {
   text-align: left;
 }
 
+.hero-intro h1 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.hero-intro .handle {
+  font-size: 1em;
+}
+
 .hero-stack {
   display: flex;
   flex-direction: column;
@@ -193,14 +203,6 @@ body {
   gap: 2.5rem;
   width: 100%;
   margin-top: 1.5rem;
-}
-
-.eyebrow {
-  margin: 0 0 0.25rem;
-  font-size: 0.72rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--accent);
 }
 
 h1 {
@@ -228,19 +230,14 @@ h1 {
   color: var(--accent);
 }
 
-.lead {
-  margin: 0 auto 1.25rem;
-  font-size: 1rem;
-  color: var(--muted);
-  max-width: 38ch;
-}
-
 .links {
   display: flex;
-  flex: 1 1 auto;
+  flex: none;
   flex-direction: row;
-  align-items: flex-end;
-  align-self: flex-end;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  align-self: stretch;
+  width: 100%;
   min-width: 0;
   gap: 0.45rem;
 }
@@ -645,15 +642,7 @@ h1 {
   display: none;
 }
 
-.ui-root.is-reading .hero-context {
-  display: none;
-}
-
 .ui-root.is-reading .hero-stack {
-  display: none;
-}
-
-.ui-root.is-reading .eyebrow {
   display: none;
 }
 
@@ -753,15 +742,19 @@ h1 {
 }
 
 @media (max-width: 480px) {
-  .hero-head {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.85rem;
+  .hero-intro h1 {
+    font-size: 0.98rem;
   }
 
-  .links {
-    flex-direction: row;
-    width: 100%;
+  .links a {
+    padding: 0.34rem 0.45rem;
+    font-size: 0.78rem;
+  }
+
+  .link-emoji,
+  .link-icon {
+    width: 0.9em;
+    height: 0.9em;
   }
 }
 
