@@ -19,6 +19,12 @@ const SANITIZE_OPTIONS = {
     'h1',
     'h2',
     'img',
+    'table',
+    'thead',
+    'tbody',
+    'tr',
+    'th',
+    'td',
   ],
   allowedAttributes: {
     ...sanitizeHtml.defaults.allowedAttributes,

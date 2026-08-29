@@ -10,18 +10,23 @@ export function mountOverlay(root: HTMLElement): void {
   const inner = document.createElement('div')
   inner.className = 'ui-inner'
   inner.innerHTML = `
-    <header class="hero glass">
-      <p class="eyebrow">${LORE.place}</p>
-      <h1>
-        <a class="brand" href="#notes">才越 <span class="handle">@cy-98</span></a>
-      </h1>
-      <div class="hero-stack">
+    <header class="hero glass" tabindex="0" aria-label="站点导航">
+      <div class="hero-head">
+        <div class="hero-intro">
+          <p class="eyebrow">${LORE.place}</p>
+          <h1>
+            <a class="brand" href="#notes"><span class="handle">@cy-98</span></a>
+          </h1>
+        </div>
+        <p class="hero-context" data-hero-context hidden></p>
         <nav class="links" aria-label="主要链接">
-          <a href="https://cy-98.github.io/markdown-cv/" target="_blank" rel="noreferrer">简历</a>
-          <a href="#notes">随笔</a>
-          <a href="${driftHref}" target="_blank" rel="noreferrer">漫游</a>
-          <a href="https://github.com/cy-98" target="_blank" rel="noreferrer">GitHub</a>
+          <a class="link-home" href="#notes"><span class="link-emoji" aria-hidden="true">🏠</span>个人站</a>
+          <a href="https://cy-98.github.io/markdown-cv/" target="_blank" rel="noreferrer"><span class="link-emoji" aria-hidden="true">📄</span>简历</a>
+          <a href="${driftHref}" target="_blank" rel="noreferrer"><span class="link-emoji" aria-hidden="true">✨</span>漫游</a>
+          <a href="https://github.com/cy-98" target="_blank" rel="noreferrer"><img class="link-icon" src="https://github.githubassets.com/favicons/favicon.svg" alt="" width="16" height="16" decoding="async" />GitHub</a>
         </nav>
+      </div>
+      <div class="hero-stack">
         ${renderHomeNoteList()}
       </div>
     </header>
@@ -32,6 +37,7 @@ export function mountOverlay(root: HTMLElement): void {
 
   const articleRoot = inner.querySelector<HTMLElement>('[data-article-root]')
   const notesSection = inner.querySelector<HTMLElement>('.home-notes')
+  const contextEl = inner.querySelector<HTMLElement>('[data-hero-context]')
   if (!articleRoot) {
     throw new Error('Missing article root')
   }
@@ -42,6 +48,15 @@ export function mountOverlay(root: HTMLElement): void {
     root.classList.toggle('is-reading', reading)
     if (notesSection) {
       notesSection.hidden = reading
+    }
+    if (contextEl) {
+      if (note) {
+        contextEl.hidden = false
+        contextEl.textContent = note.title
+      } else {
+        contextEl.hidden = true
+        contextEl.textContent = ''
+      }
     }
     articleRoot.innerHTML = note ? renderNoteArticle(note) : ''
     if (scrollToArticle && note) {

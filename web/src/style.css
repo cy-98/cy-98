@@ -158,7 +158,7 @@ body {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--glass-border);
-  border-radius: 14px;
+  border-radius: 4px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
   transition: opacity 0.8s ease, border-color 0.15s, background 0.15s;
 }
@@ -166,10 +166,24 @@ body {
 .hero {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   margin: 0;
-  padding: 1.1rem 1.25rem 0.7rem;
-  text-align: center;
+  padding: 1.1rem 1.25rem 1.25rem;
+  text-align: left;
+}
+
+.hero-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.25rem;
+  width: 100%;
+}
+
+.hero-intro {
+  flex: 0 0 auto;
+  min-width: 0;
+  text-align: left;
 }
 
 .hero-stack {
@@ -178,11 +192,11 @@ body {
   justify-content: space-between;
   gap: 2.5rem;
   width: 100%;
-  margin-top: 0.4rem;
+  margin-top: 1.5rem;
 }
 
 .eyebrow {
-  margin: 0 0 0.3rem;
+  margin: 0 0 0.25rem;
   font-size: 0.72rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -207,8 +221,10 @@ h1 {
 
 .handle {
   display: block;
-  font-size: 0.5em;
+  margin-top: 0;
+  font-size: 0.72em;
   font-weight: 500;
+  line-height: 1.2;
   color: var(--accent);
 }
 
@@ -221,20 +237,47 @@ h1 {
 
 .links {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.65rem;
+  flex: 1 1 auto;
+  flex-direction: row;
+  align-items: flex-end;
+  align-self: flex-end;
+  min-width: 0;
+  gap: 0.45rem;
 }
 
 .links a {
-  padding: 0.45rem 0.95rem;
-  border-radius: 999px;
+  display: inline-flex;
+  flex: 1 1 0;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.38rem 0.75rem;
+  border-radius: 4px;
   border: 1px solid var(--glass-border);
   background: rgba(8, 24, 48, 0.6);
   color: var(--text);
   text-decoration: none;
-  font-size: 0.88rem;
+  font-size: 0.84rem;
+  white-space: nowrap;
   transition: border-color 0.15s, background 0.15s;
+}
+
+.link-emoji {
+  flex: 0 0 auto;
+  width: 1em;
+  font-size: 1em;
+  line-height: 1;
+  text-align: center;
+}
+
+.link-icon {
+  flex: 0 0 auto;
+  width: 1em;
+  height: 1em;
+  display: block;
+  margin: 0;
+  object-fit: contain;
+  object-position: center;
 }
 
 .links a:hover {
@@ -242,11 +285,15 @@ h1 {
   background: var(--accent-soft);
 }
 
+.links a.link-home {
+  display: none;
+}
+
 .home-notes {
   margin: 0;
-  padding: 0.55rem 0.45rem 0.15rem;
+  padding: 0.55rem 0.45rem 0.75rem;
   text-align: left;
-  border-radius: 12px;
+  border-radius: 4px;
   background: rgba(3, 10, 22, 0.38);
 }
 
@@ -277,13 +324,10 @@ h1 {
 .note-list {
   display: flex;
   flex-direction: column;
+  gap: 4px;
   list-style: none;
   margin: 0;
   padding: 0;
-}
-
-.note-list li + li .note-item {
-  border-top: 1px solid var(--glass-border);
 }
 
 .note-item {
@@ -293,7 +337,7 @@ h1 {
   padding: 0.5rem 0.55rem;
   color: inherit;
   text-decoration: none;
-  border-radius: 10px;
+  border-radius: 4px;
   transition: background 0.15s;
 }
 
@@ -391,6 +435,86 @@ h1 {
   margin: 0.2rem 0;
 }
 
+.note-body table {
+  width: 100%;
+  min-width: 32rem;
+  margin: 0 0 1rem;
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
+.note-body thead th {
+  background: rgba(8, 24, 48, 0.72);
+  color: var(--accent);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.note-body th,
+.note-body td {
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--glass-border);
+  text-align: left;
+  vertical-align: top;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+.note-body tbody tr:nth-child(even) {
+  background: rgba(3, 10, 22, 0.35);
+}
+
+.note-body tbody tr:hover {
+  background: var(--accent-soft);
+}
+
+.note-body td:first-child,
+.note-body th:first-child {
+  white-space: nowrap;
+  width: 1%;
+}
+
+.note-body :not(pre) > code {
+  font-family: ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, monospace;
+  font-size: 0.85em;
+  padding: 0.12em 0.38em;
+  border-radius: 5px;
+  border: 1px solid rgba(110, 184, 232, 0.18);
+  background: rgba(110, 184, 232, 0.12);
+  color: var(--accent);
+}
+
+.note-body pre {
+  margin: 0 0 1rem;
+  padding: 0.9rem 1rem;
+  overflow-x: auto;
+  border-radius: 10px;
+  border: 1px solid var(--glass-border);
+  background: rgba(3, 10, 22, 0.78);
+  box-shadow: inset 0 1px 0 rgba(110, 184, 232, 0.06);
+}
+
+.note-body pre code {
+  display: block;
+  font-family: ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, monospace;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: #d4e8ff;
+  white-space: pre;
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+
+.note-body hr {
+  margin: 1.25rem 0;
+  border: 0;
+  border-top: 1px solid var(--glass-border);
+}
+
 .panel h2 {
   margin: 0 0 0.5rem;
   font-size: 0.95rem;
@@ -482,7 +606,7 @@ h1 {
   max-width: none;
   margin: 0;
   min-height: 100dvh;
-  padding: 2rem 1.5rem 3rem 16.25rem;
+  padding: 0 1.5rem 3rem;
 }
 
 .ui-root.is-reading .home-notes[hidden] {
@@ -490,53 +614,93 @@ h1 {
 }
 
 .ui-root.is-reading .hero {
-  position: fixed;
-  left: 1.15rem;
-  top: 50%;
-  transform: translateY(-50%);
+  position: sticky;
+  top: 0;
   z-index: 3;
-  width: 13.25rem;
+  width: calc(100% + 3rem);
+  max-width: none;
+  margin: 0 -1.5rem 1.25rem;
   align-items: stretch;
-  padding: 1rem 0.95rem 1.05rem;
+  padding: 0.65rem 1.25rem;
   text-align: left;
+  border-radius: 0;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  outline: none;
+}
+
+.ui-root.is-reading .hero-head {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: stretch;
+  gap: 0;
+  width: 100%;
+  max-width: 56rem;
+  margin: 0 auto;
+}
+
+.ui-root.is-reading .hero-intro {
+  display: none;
+}
+
+.ui-root.is-reading .hero-context {
+  display: none;
 }
 
 .ui-root.is-reading .hero-stack {
-  gap: 0.75rem;
-  margin-top: 0.35rem;
+  display: none;
 }
 
 .ui-root.is-reading .eyebrow {
-  margin-bottom: 0.2rem;
-}
-
-.ui-root.is-reading h1 {
-  font-size: 1.2rem;
-}
-
-.ui-root.is-reading .handle {
-  font-size: 0.62em;
+  display: none;
 }
 
 .ui-root.is-reading .links {
-  flex-direction: column;
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: row;
+  flex-wrap: nowrap;
   align-items: stretch;
-  justify-content: flex-start;
+  align-self: stretch;
+  width: 100%;
+  min-width: 0;
   gap: 0.45rem;
+  max-height: none;
+  margin-top: 0;
+  opacity: 1;
+  overflow: visible;
+  pointer-events: auto;
+}
+
+.ui-root.is-reading .links a.link-home {
+  display: inline-flex;
 }
 
 .ui-root.is-reading .links a {
-  text-align: center;
+  flex: 1 1 0;
+  justify-content: center;
+  padding: 0.42rem 0.65rem;
+  font-size: 0.82rem;
 }
 
 .ui-root.is-reading [data-article-root] {
   display: block;
   max-width: 42rem;
   margin: 0 auto;
+  padding-top: 0.25rem;
+  overflow-x: auto;
 }
 
 .ui-root.is-reading .note-article {
   padding: 1.45rem 1.55rem 1.7rem;
+  overflow-x: auto;
+}
+
+.ui-root.is-reading .note-body {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .ui-root.is-reading .note-article h2 {
@@ -562,43 +726,42 @@ h1 {
 
 @media (max-width: 720px) {
   .ui-root.is-reading .ui-inner {
-    padding: 0.85rem 0.85rem 2rem;
+    padding: 0 0.85rem 2rem;
   }
 
   .ui-root.is-reading .hero {
-    position: sticky;
-    top: 0.75rem;
-    left: auto;
-    transform: none;
-    width: 100%;
-    margin-bottom: 1rem;
-    flex-direction: row;
+    top: 0;
+    width: calc(100% + 1.7rem);
+    margin: 0 -0.85rem 1rem;
+    padding: 0.6rem 0.85rem;
+  }
+
+  .ui-root.is-reading .hero-head {
     flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.55rem 0.75rem;
-    padding: 0.7rem 0.9rem;
-  }
-
-  .ui-root.is-reading .eyebrow {
-    display: none;
-  }
-
-  .ui-root.is-reading .hero-stack {
-    width: auto;
-    margin: 0;
-    flex: 1 1 auto;
+    gap: 0.5rem 0.75rem;
   }
 
   .ui-root.is-reading .links {
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: flex-end;
+    flex: 1 1 100%;
+    gap: 0.4rem;
   }
 
   .ui-root.is-reading .links a {
-    padding: 0.32rem 0.7rem;
-    font-size: 0.8rem;
+    padding: 0.36rem 0.5rem;
+    font-size: 0.78rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.85rem;
+  }
+
+  .links {
+    flex-direction: row;
+    width: 100%;
   }
 }
 
