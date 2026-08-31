@@ -385,6 +385,7 @@ h1 {
   font-size: 0.88rem;
   line-height: 1.7;
   color: var(--muted);
+  min-width: 0;
 }
 
 .note-body h1,
@@ -432,10 +433,17 @@ h1 {
   margin: 0.2rem 0;
 }
 
-.note-body table {
-  width: 100%;
-  min-width: 32rem;
+.note-body .table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
   margin: 0 0 1rem;
+}
+
+.note-body table {
+  width: max-content;
+  min-width: 100%;
+  margin: 0;
   border-collapse: collapse;
   border-spacing: 0;
   font-size: 0.82rem;
@@ -679,17 +687,10 @@ h1 {
   max-width: 42rem;
   margin: 0 auto;
   padding-top: 0.25rem;
-  overflow-x: auto;
 }
 
 .ui-root.is-reading .note-article {
   padding: 1.45rem 1.55rem 1.7rem;
-  overflow-x: auto;
-}
-
-.ui-root.is-reading .note-body {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
 }
 
 .ui-root.is-reading .note-article h2 {

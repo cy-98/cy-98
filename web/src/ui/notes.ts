@@ -37,13 +37,20 @@ export function renderHomeNoteList(): string {
   `
 }
 
+function wrapTables(html: string): string {
+  if (!html.includes('<table')) return html
+  return html
+    .replace(/<table/gi, '<div class="table-scroll"><table')
+    .replace(/<\/table>/gi, '</table></div>')
+}
+
 export function renderNoteArticle(note: Note): string {
   return `
     <article class="panel panel--list glass note-article" aria-labelledby="note-title">
       <p class="note-back"><a href="#notes">返回列表</a></p>
       <h2 id="note-title">${escapeHtml(note.title)}</h2>
       <time class="note-date" datetime="${note.date}">${formatDate(note.date)}</time>
-      <div class="note-body">${note.bodyHtml}</div>
+      <div class="note-body">${wrapTables(note.bodyHtml)}</div>
     </article>
   `
 }
