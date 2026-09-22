@@ -19,6 +19,7 @@ export function mountOverlay(root: HTMLElement): void {
         <nav class="links" aria-label="主要链接">
           <a class="link-home" href="#notes"><span class="link-emoji" aria-hidden="true">🏠</span>个人站</a>
           <a href="https://cy-98.github.io/markdown-cv/" target="_blank" rel="noreferrer"><span class="link-emoji" aria-hidden="true">📄</span>简历</a>
+          <a href="https://cy-98.github.io/SimpleGuitar-APP/" target="_blank" rel="noreferrer"><span class="link-emoji" aria-hidden="true">🎸</span>吉他</a>
           <a href="${driftHref}" target="_blank" rel="noreferrer"><span class="link-emoji" aria-hidden="true">✨</span>漫游</a>
           <a href="https://github.com/cy-98" target="_blank" rel="noreferrer"><img class="link-icon" src="https://github.githubassets.com/favicons/favicon.svg" alt="" width="16" height="16" decoding="async" />GitHub</a>
         </nav>

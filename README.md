@@ -3,6 +3,7 @@
 - 💞️ [Here is my CV](https://cy-98.github.io/markdown-cv/).
 - 🐢 [My thoughts here](https://docs.page/cy-98/cy-docs)
 - 🌐 [Personal site](https://cy-98.github.io/cy-98/) — Drift 星际漫游背景（见 [`web/`](web/)）
+- 🎸 [Scale Pulse](https://cy-98.github.io/SimpleGuitar-APP/) — 节拍器 + 音阶级数练习
 - 🛸 [Drift](https://cy-98.github.io/drift/) — 第一人称星际漫游
 - 📫 Reach me: wechat 18747099166.
 
