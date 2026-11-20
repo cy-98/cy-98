@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>笔试回答整理</title>
+  <style>
+    :root {
+      --bg: #f7f5f1;
+      --surface: #fffdf9;
+      --ink: #1c1a17;
+      --muted: #5c574f;
+      --line: #ddd6cb;
+      --accent: #0f5c4c;
+      --accent-soft: #e4f0ec;
+      --warn: #7a4a12;
+      --warn-bg: #f6ecdf;
+      --code-bg: #efeae2;
+      --radius: 10px;
+      --max: 52rem;
+      --font: "Source Han Sans SC", "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      --mono: "IBM Plex Mono", "SF Mono", ui-monospace, Menlo, Consolas, monospace;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(1200px 500px at 10% -10%, #e8f2ef 0%, transparent 55%),
+        radial-gradient(900px 400px at 100% 0%, #f3ebe0 0%, transparent 50%),
+        var(--bg);
+      font-family: var(--font);
+      line-height: 1.65;
+      font-size: 16px;
+    }
+
+    header.hero {
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,253,249,0.92), rgba(247,245,241,0.6));
+      padding: 2.75rem 1.25rem 2rem;
+    }
+
+    .wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 1.25rem 3.5rem;
+    }
+
+    header.hero .wrap { padding-bottom: 0; }
+
+    h1 {
+      margin: 0 0 0.5rem;
+      font-size: clamp(1.6rem, 3vw, 2rem);
+      letter-spacing: -0.02em;
+      font-weight: 700;
+    }
+
+    .lede {
+      margin: 0;
+      color: var(--muted);
+      max-width: 40rem;
+    }
+
+    nav.toc {
+      margin: 1.75rem 0 0;
+      display: grid;
+      gap: 0.5rem;
+    }
+
+    nav.toc a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      border-left: 3px solid var(--accent);
+      padding-left: 0.75rem;
+    }
+
+    nav.toc a:hover { text-decoration: underline; }
+
+    section {
+      margin-top: 2.5rem;
+      padding-top: 0.25rem;
+    }
+
+    h2 {
+      margin: 0 0 1rem;
+      font-size: 1.35rem;
+      color: var(--accent);
+      letter-spacing: -0.01em;
+    }
+
+    h3 {
+      margin: 1.75rem 0 0.65rem;
+      font-size: 1.05rem;
+    }
+
+    p { margin: 0.65rem 0; }
+
+    ul, ol { margin: 0.5rem 0 0.75rem; padding-left: 1.25rem; }
+    li { margin: 0.3rem 0; }
+
+    .note {
+      margin: 1rem 0;
+      padding: 0.85rem 1rem;
+      background: var(--warn-bg);
+      border-left: 3px solid var(--warn);
+      color: var(--warn);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      font-size: 0.95rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1rem 1.1rem;
+      margin: 0.85rem 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.85rem 0 1.1rem;
+      font-size: 0.95rem;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    th, td {
+      text-align: left;
+      vertical-align: top;
+      padding: 0.7rem 0.8rem;
+      border-bottom: 1px solid var(--line);
+    }
+
+    th {
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    tr:last-child td { border-bottom: none; }
+
+    code {
+      font-family: var(--mono);
+      font-size: 0.88em;
+      background: var(--code-bg);
+      padding: 0.1em 0.35em;
+      border-radius: 4px;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      padding: 0.15rem 0.45rem;
+      border-radius: 4px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      margin-right: 0.35rem;
+    }
+
+    .tag.muted {
+      background: var(--code-bg);
+      color: var(--muted);
+    }
+
+    .grid-2 {
+      display: grid;
+      gap: 0.85rem;
+    }
+
+    @media (min-width: 720px) {
+      .grid-2 { grid-template-columns: 1fr 1fr; }
+    }
+
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    @media print {
+      body { background: #fff; }
+      header.hero { background: none; }
+      a { color: inherit; text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <h1>笔试回答整理</h1>
+      <p class="lede">Treasury 全栈与 Agent 提效、InApp 跨端性能、激励百元玩法配置化——按题目结构梳理，区分本人亲手实现与公司已有能力。</p>
+      <nav class="toc" aria-label="目录">
+        <a href="#q1">一、Treasury 全栈交付与 Agent 提效</a>
+        <a href="#q2">二、跨端核心页面加载时长下降约 80%</a>
+        <a href="#q3">三、激励百元玩法三层拆分</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section id="q1">
+      <h2>一、Treasury 全栈交付与 Agent 提效</h2>
+      <p>题目关注：各有多少人参与、各自负责什么；五个微服务拆分；Skill / Subagent / Slack bot 哪些是亲手设计实现、哪些沿用公司已有能力。</p>
+
+      <h3>1.1 全栈交付：人数与职责</h3>
+      <table>
+        <thead>
+          <tr><th>方向</th><th>人数</th><th>职责</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>WebApp 金融产品（全栈交付）</td>
+            <td><strong>1 人（本人）</strong></td>
+            <td>应用整体设计：服务鉴权、数据存储到产品交互的端到端交付</td>
+          </tr>
+          <tr>
+            <td>数据 / 服务端对接</td>
+            <td><strong>两个服务端团队</strong></td>
+            <td>依托公司金融系统做监控与离线计算，重要数据落表后供 WebApp 使用</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="card">
+        <p style="margin-top:0"><strong>本人在 WebApp 侧的五个主要职责</strong></p>
+        <ol>
+          <li>公司及用户银行账户的查询与操作</li>
+          <li>公司账户资金的报表与离线统计分析</li>
+          <li>交易流水的记账与对账</li>
+          <li>闲余资金的投资与流动审查</li>
+          <li>各国资金池情况的查询与调动</li>
+        </ol>
+      </div>
+
+      <h3>1.2 五个微服务的拆分</h3>
+      <ul>
+        <li><strong>拆分方式</strong>：单体服务拆为五个独立 Server App，各自连库、独立部署。</li>
+        <li><strong>原则</strong>：保持原有业务逻辑不变；工作重心是工程迁移与旧技术债清理。</li>
+        <li><strong>边界</strong>：业务职责划分沿用既有五项职责，拆分本身偏工程化迁移。</li>
+      </ul>
+
+      <h3>1.3 Agent 提效：人数与背景</h3>
+      <table>
+        <thead>
+          <tr><th>方向</th><th>人数</th><th>说明</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Agent 提效方案设计与落地</td>
+            <td><strong>1 人（本人）</strong></td>
+            <td>独自设计 Skill / Subagent 体系与交付流水线</td>
+          </tr>
+          <tr>
+            <td>平台与周边能力</td>
+            <td>公司已有工具链</td>
+            <td>在线 Agent 开发工具、文档系统、需求系统等</td>
+          </tr>
+        </tbody>
+      </table>
+      <p><strong>背景</strong>：WebApp 需求堆积、人力不足，测试与联调成本上升；目标是从本地 Agent 开发推进到云端 Agent 开发，并与公司协作工具打通。</p>
+
+      <h3>1.4 亲手实现 vs 公司已有能力</h3>
+      <table>
+        <thead>
+          <tr><th>能力</th><th>归属</th><th>说明</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Skill / Subagent 机制与仓库规范</td>
+            <td><span class="tag">亲手</span></td>
+            <td>机制落在仓库；在线 Agent 读取 <code>Agent.md</code> 加载整套规则</td>
+          </tr>
+          <tr>
+            <td>Planner / Developer / Tester / Deliver</td>
+            <td><span class="tag">亲手</span></td>
+            <td>四个 Subagent 的职责与编排语义</td>
+          </tr>
+          <tr>
+            <td>开发 / 自动化测试 / 工具 / 设计 Skill</td>
+            <td><span class="tag">亲手</span></td>
+            <td>四类 Skill 内容与准则</td>
+          </tr>
+          <tr>
+            <td>在线 Agent 开发平台</td>
+            <td><span class="tag muted">公司已有</span></td>
+            <td>云端 Agent 运行与协作入口</td>
+          </tr>
+          <tr>
+            <td>文档、需求系统（Ticket）</td>
+            <td><span class="tag muted">公司已有</span></td>
+            <td>Planner 监控 Ticket；结果回写 Ticket</td>
+          </tr>
+          <tr>
+            <td>GitLab CI / 部署 Job</td>
+            <td><span class="tag muted">公司已有</span></td>
+            <td>对接部署状态与测试环境发布</td>
+          </tr>
+          <tr>
+            <td>Slack / Atlassian 等工具接入</td>
+            <td><span class="tag">亲手封装</span> + <span class="tag muted">公司基建</span></td>
+            <td>基础通道与集成能力沿用公司；工具用法沉淀为 Skill，通知语义接入 Deliver</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>1.5 Subagent（亲手设计）</h3>
+      <table>
+        <thead>
+          <tr><th>Subagent</th><th>职责</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Planner</strong></td>
+            <td>承接需求（上传文档或监控 Ticket）；多轮补充上下文、锁定范围；产出 <code>plan.md</code>（需求范围、代码审查结果、测试 case 列表）</td>
+          </tr>
+          <tr>
+            <td><strong>Developer</strong></td>
+            <td>按 TDD：依 <code>plan.md</code> 先写前端单测并完成前端；sandbox + mock 验证 case；再完成后端；全通过后提交，经 GitLab Job 部署测试环境</td>
+          </tr>
+          <tr>
+            <td><strong>Tester</strong></td>
+            <td>检查部署状态；测试环境 E2E；结果写入 Ticket；失败则回到上一环节重做</td>
+          </tr>
+          <tr>
+            <td><strong>Deliver</strong></td>
+            <td>串联全流程：监控各步状态，Slack 通知团队，检查产出是否符合预期（各 Subagent 的编排组合）</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>1.6 Skill（亲手设计）</h3>
+      <div class="grid-2">
+        <div class="card">
+          <p style="margin:0"><strong>开发 Skill</strong></p>
+          <p style="margin:0.4rem 0 0;color:var(--muted)">仓库细节、开发习惯、封装组件；TDD Guard、TypeScript、GraphQL、权限系统、服务端协议渲染等准则。</p>
+        </div>
+        <div class="card">
+          <p style="margin:0"><strong>自动化测试 Skill</strong></p>
+          <p style="margin:0.4rem 0 0;color:var(--muted)">Playwright CLI + 测试账号；分步截图验证；列表项分别截图并注释；可访问性与键盘操作。</p>
+        </div>
+        <div class="card">
+          <p style="margin:0"><strong>工具 Skill</strong></p>
+          <p style="margin:0.4rem 0 0;color:var(--muted)">GitLab、Atlassian 等用法，打通部署与日常协作自动化。</p>
+        </div>
+        <div class="card">
+          <p style="margin:0"><strong>设计 Skill</strong></p>
+          <p style="margin:0.4rem 0 0;color:var(--muted)">交互、视觉、流程等产品设计细节，供 Agent 对齐标准。</p>
+        </div>
+      </div>
+
+      <h3>1.7 Slack Bot</h3>
+      <ul>
+        <li><span class="tag">亲手</span> Deliver 中的状态监控与通知语义（何时通知、通知什么、如何绑定流水线步骤）。</li>
+        <li><span class="tag muted">公司已有</span> Slack 通道与基础 Bot/集成能力。</li>
+      </ul>
+    </section>
+
+    <section id="q2">
+      <h2>二、跨端核心页面加载时长下降约 80%</h2>
+      <p>题目关注：主要改动、国家/页面/测量口径，以及仍慢或无收益页面卡在哪里、为何未继续优化。</p>
+
+      <h3>2.1 背景与问题</h3>
+      <ul>
+        <li>非发达国家用户加载很慢；较差国家 <strong>P95 约可达 10s</strong>。</li>
+        <li>根因：移动端<strong>浏览器/容器启动</strong>与<strong>页面脚本加载</strong>均偏长，且两者<strong>串行</strong>，渗透率长期偏低。</li>
+      </ul>
+
+      <h3>2.2 主要带来收益的改动</h3>
+      <table>
+        <thead>
+          <tr><th>路线</th><th>内容</th><th>效果</th><th>本人角色</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>A. Lynx 跨端迁移</strong></td>
+            <td>Web 浏览器方案迁到 Lynx 跨端渲染</td>
+            <td>约一个月上线数据最差的三个国家，P95 达到秒开（相对约 10s，对应「下降约 80%」量级）</td>
+            <td>带小组做技术评审与方案落地</td>
+          </tr>
+          <tr>
+            <td><strong>B. 资源预加载</strong></td>
+            <td>脚本离线下载、容器预加载等</td>
+            <td>提升有限；对最终渗透率影响不明显</td>
+            <td>团队并行路线</td>
+          </tr>
+        </tbody>
+      </table>
+      <p><strong>主贡献结论</strong>：加载时长大幅下降主要由 <strong>Lynx 跨端迁移</strong>带来；预加载不是「约 80%」的主叙事。</p>
+
+      <h3>2.3 国家、页面与测量口径</h3>
+      <table>
+        <thead>
+          <tr><th>维度</th><th>说明</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>国家</td><td>优先上线性能数据最差的三个国家（非发达国家中加载最差一批）</td></tr>
+          <tr><td>页面</td><td>跨端核心页面（业务主路径核心页，非全站）</td></tr>
+          <tr><td>口径</td><td>页面加载时长 <strong>P95</strong>；优化前较差国家约 10s，优化后秒开</td></tr>
+          <tr><td>业务结果</td><td>同时观察用户渗透率；预加载路线在渗透率上收益不明显</td></tr>
+        </tbody>
+      </table>
+      <p class="note">若笔试需要写死国家名、具体页面名或精确埋点字段，需补充业务侧正式指标名与实验文档；当前素材未给出具体国别列表与页面 URL。</p>
+
+      <h3>2.4 仍慢 / 无收益的卡点与未继续优化原因</h3>
+      <table>
+        <thead>
+          <tr><th>现象</th><th>卡点</th><th>未继续优化的原因</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>相对发达国家仍有差距</td>
+            <td>容器启动时间、资源加载时间</td>
+            <td>主要取决于用户手机性能与 Lynx 容器性能，业务团队难以控制</td>
+          </tr>
+          <tr>
+            <td>预加载等手段收益弱</td>
+            <td>启动与加载链路仍受设备/容器约束</td>
+            <td>实验对渗透率提升不明显，投入产出比不足</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="q3">
+      <h2>三、激励百元玩法：配置 / UI / 玩法三层拆分</h2>
+      <p>题目关注：哪一个真实需求或线上问题促使这样拆；最终如何解决；还考虑过什么方案、为何未选。</p>
+
+      <h3>3.1 触发拆分的真实问题</h3>
+      <ul>
+        <li><strong>业务目标</strong>：多国用户拉新、拉活，发放大额现金奖励。</li>
+        <li><strong>约束</strong>：UI 元素与数值金额需符合各国文化与节日氛围。</li>
+        <li><strong>痛点</strong>：元旦/圣诞等节日下，日韩、欧美、非洲差异明显；以往用代码里的国家判断渲染不同组件，需求堆积后难维护、难复用。</li>
+        <li><strong>契机</strong>：以本玩法为首例，抽离玩法逻辑与 UI，走向可配置化。</li>
+      </ul>
+
+      <h3>3.2 最终方案</h3>
+      <table>
+        <thead>
+          <tr><th>层</th><th>职责</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>配置层</strong></td><td>UI 元素统一推到配置平台；各国素材、文案、金额可配置下发</td></tr>
+          <tr><td><strong>UI 层</strong></td><td>前端固定整体界面与交互结构，不按国家堆叠整套页面</td></tr>
+          <tr><td><strong>玩法层</strong></td><td>玩法逻辑用状态机维护；向状态机注入各国所需接口与素材接口</td></tr>
+        </tbody>
+      </table>
+      <p><strong>效果</strong>：多国家配置可快速上线；设计元素可沉淀、产品可复用；开发人力更易协调。</p>
+
+      <h3>3.3 备选方案与取舍</h3>
+      <table>
+        <thead>
+          <tr><th>方案</th><th>是否采用</th><th>原因</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>多页面开发（各国/各节日单独做页）</td>
+            <td><strong>未选</strong></td>
+            <td>不利于设计元素沉淀与产品复用；更难协调开发人力</td>
+          </tr>
+          <tr>
+            <td>配置方案（配置 + UI 结构 + 状态机玩法）</td>
+            <td><strong>采用</strong></td>
+            <td>初始开发周期更长，但长期维护与多国复用成本更低</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <footer>
+      <p>口述三句：① Treasury WebApp 全栈 1 人，微服务五拆偏迁移；Agent 方案本人设计，平台/CI/Ticket/Slack 基建靠公司。② 性能主收益来自 Lynx（最差三国、核心页、P95 约 10s→秒开）；预加载弱；剩余差距在容器与设备。③ 百元玩法因节日多国 if 渲染不可维护 → 配置平台 + 固定 UI + 状态机；弃多页面。</p>
+      <p>同内容 Markdown：<code>docs/interview/笔试回答.md</code></p>
+    </footer>
+  </main>
+</body>
+</html>
